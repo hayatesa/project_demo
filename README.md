@@ -9,8 +9,6 @@
 |JDK|1.8|
 |Redis|4.0.9|
 |MySQL|5.7|
-|Shiro|1.4.0|
-|kaptcha|2.3.2|
 |...|...|
 
 
@@ -18,14 +16,18 @@
  
 |技术|版本|
 |:---:|:---:|
-|jdk|1.8|
 |SpringBoot|2.0|
 |Shiro|1.4.0|
 |kaptcha|2.3.2|
 |...|...|
  
 ## 公共模块: common  
-## 验证码: kaptcha
-## 日志: log
-## 安全控制: shiro
-## SQL性能监控: druid
+
+## 验证码: kaptcha  
+
+## 日志: log  
+
+## 安全控制: shiro  
+
+## SQL性能监控: druid  
+
