@@ -1,4 +1,4 @@
-package com.dev.main.common.util;
+package com.dev.main.log.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;

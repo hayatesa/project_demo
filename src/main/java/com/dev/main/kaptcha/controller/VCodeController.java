@@ -1,4 +1,4 @@
-package com.dev.main.common.controller;
+package com.dev.main.kaptcha.controller;
 
 import com.dev.main.common.util.CommonUtil;
 import com.dev.main.common.util.ResultMap;

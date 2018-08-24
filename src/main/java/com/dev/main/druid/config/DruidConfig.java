@@ -1,4 +1,4 @@
-package com.dev.main.druid;
+package com.dev.main.druid.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 
 @Configuration
-public class DruidConfiguration {
+public class DruidConfig {
     @Value("${spring.datasource.url}")
     private String dbUrl;
     @Value("${spring.datasource.username}")

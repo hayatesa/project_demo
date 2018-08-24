@@ -1,4 +1,4 @@
-package com.dev.main.common.config;
+package com.dev.main.kaptcha.config;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
