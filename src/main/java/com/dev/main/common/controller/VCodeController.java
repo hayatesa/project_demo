@@ -1,6 +1,7 @@
 package com.dev.main.common.controller;
 
 import com.dev.main.common.util.CommonUtil;
+import com.dev.main.common.util.ResultMap;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  * 验证码相关
  */
 @Controller
-@RequestMapping("vcode")
+@RequestMapping("/api/captcha")
 public class VCodeController {
 
     @Autowired
@@ -30,12 +31,11 @@ public class VCodeController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @RequestMapping(value = "captcha", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getKaptchaImage(HttpServletRequest request,
                                         HttpServletResponse response) throws Exception {
         response.setDateHeader("Expires", 0);
-        response.setHeader("Cache-Control",
-                "no-store, no-cache, must-revalidate");
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
         response.addHeader("Cache-Control", "post-check=0, pre-check=0");
         response.setHeader("Pragma", "no-cache");
         response.setContentType("image/jpeg");
@@ -43,15 +43,9 @@ public class VCodeController {
         String capText = captchaProducer.createText();
 
         String uuid = CommonUtil.createUUID();
-        try {
-            redisTemplate.opsForValue().set(uuid, capText, 60 * 5, TimeUnit.SECONDS);
-            Cookie cookie = new Cookie("captchaCode", uuid);
-            response.addCookie(cookie);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(uuid + ": " + capText);
-        System.out.println("Value In Redis： "+redisTemplate.opsForValue().get(uuid));
+        redisTemplate.opsForValue().set(uuid, capText, 60 * 5, TimeUnit.SECONDS);
+        Cookie cookie = new Cookie("captchaCode", uuid);
+        response.addCookie(cookie);
         BufferedImage bi = captchaProducer.createImage(capText);
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(bi, "jpg", out);
@@ -63,7 +57,10 @@ public class VCodeController {
         return null;
     }
 
-    //@RequestMapping("verify")
+    @RequestMapping(name = "/verify", method = RequestMethod.GET)
+    public ResultMap verify() {
+        return ResultMap.success();
+    }
 
     public void setCaptchaProducer(DefaultKaptcha captchaProducer) {
         this.captchaProducer = captchaProducer;
