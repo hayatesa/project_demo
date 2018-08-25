@@ -9,14 +9,14 @@ public class ResultMap extends HashMap<String, Object> {
 
     public ResultMap() {
         //code==0,表示正常
-        put(CODE, 0);
+        put(CODE, 200);
     }
 
     /**
      * 异常
      */
     public static ResultMap error() {
-        return error(500, "系统异常，请联系管理员");
+        return error(500, "系统异常");
     }
 
     /**

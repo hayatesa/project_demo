@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = DataNotFoundException.class)
-    @ResponseBody
     public ResultMap dataNotFoundExceptionHandler(DataNotFoundException e) {
+        e.printStackTrace();
         return ResultMap.error(e.getMessage());
     }
 
     @ExceptionHandler(value = DataUpdateException.class)
-    @ResponseBody
     public ResultMap dataUpdateExceptionHandler(DataUpdateException e) {
+        e.printStackTrace();
         return ResultMap.error(e.getMessage());
     }
 
     @ExceptionHandler(value = Exception.class)
-    @ResponseBody
     public ResultMap exceptionHandler(Exception e) {
+        e.printStackTrace();
         return ResultMap.error(e.getMessage());
     }
 

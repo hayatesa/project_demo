@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -149,9 +150,12 @@ public class CustomizeCommentGenerator implements CommentGenerator {
 //        field.addJavaDocLine(sb.toString().replace("\n", " "));
 //        field.addJavaDocLine(" */");
         // 单行注释
-        sb.append("// ");
-        sb.append(introspectedColumn.getRemarks());
-        field.addJavaDocLine(sb.toString().replace("\n", " "));
+        String remarks = introspectedColumn.getRemarks();
+        if(!StringUtils.isBlank(remarks)) {
+            sb.append("// ");
+            sb.append(remarks);
+            field.addJavaDocLine(sb.toString().replace("\n", " "));
+        }
     }
     
     @Override
@@ -166,7 +170,6 @@ public class CustomizeCommentGenerator implements CommentGenerator {
 //        sb.append(introspectedTable.getFullyQualifiedTable());
 //        field.addJavaDocLine(sb.toString().replace("\n", " "));
 //        field.addJavaDocLine(" */");
-        
         // 单行注释
         sb.append("// ");
         sb.append(introspectedTable.getFullyQualifiedTable());

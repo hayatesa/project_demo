@@ -57,7 +57,7 @@ public class VCodeController {
         return null;
     }
 
-    @RequestMapping(name = "/verify", method = RequestMethod.GET)
+    @RequestMapping(path = "/verify", method = RequestMethod.GET)
     public ResultMap verify() {
         return ResultMap.success();
     }
