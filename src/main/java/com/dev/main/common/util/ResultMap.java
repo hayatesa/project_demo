@@ -1,22 +1,26 @@
 package com.dev.main.common.util;
 
+import com.dev.main.common.statics.StatusCode;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ResultMap extends HashMap<String, Object> {
     private static final String CODE = "code";
     private static final String MSG = "msg";
+    private static final String TIMESTAMP = "timestamp";
+    private static final String PATH = "path";
 
     public ResultMap() {
         //code==0,表示正常
-        put(CODE, 200);
+        put(CODE, StatusCode.SUCCESS);
     }
 
     /**
      * 异常
      */
     public static ResultMap error() {
-        return error(500, "系统异常");
+        return error(StatusCode.ERROR, "操作失败");
     }
 
     /**

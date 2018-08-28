@@ -7,8 +7,6 @@ public interface StatusCode {
 
     static final Integer SUCCESS = 200; // 成功
 
-    static final Integer FAIL = 400; // 逻辑错误（失败）
-
     static final Integer NO_LOGIN = 401; // 未授权
 
     static final Integer NOT_UNAUTHORIZED = 403; // 无权限

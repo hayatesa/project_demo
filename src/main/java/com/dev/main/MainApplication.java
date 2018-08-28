@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @ServletComponentScan // 扫描filter和servlet
 @EnableTransactionManagement//开启事务管理
-@MapperScan("com.dev.main.dao")//与dao层的@Mapper二选一写上即可(主要作用是扫包)
+// @MapperScan("com.dev.main.dao")//与dao层的@Mapper二选一写上即可(主要作用是扫包)
 public class MainApplication {
 
     public static void main(String[] args) {

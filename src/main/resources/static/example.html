@@ -21,7 +21,7 @@
         $.ajax({
             url: 'http://127.0.0.2:8080/api/restful/' + id,
             type: 'get',
-            success: (data)=> {
+            success: (data) => {
                 console.log(data);
             }
         });
@@ -41,7 +41,7 @@
                     k3: 'v3'
                 },
             }),
-            success: (data)=> {
+            success: (data) => {
                 console.log(data);
             }
         });
@@ -49,7 +49,7 @@
     function doPUT() {
         $.ajax({
             url: 'http://127.0.0.2:8080/api/restful',
-            type: 'put',
+            type: 'PUT',
             dataType: "json",
             accept: "application/json",
             contentType: "application/json",
@@ -62,7 +62,7 @@
                     k3: 'v3'
                 },
             }),
-            success: (data)=> {
+            success: (data) => {
                 console.log(data);
             }
         });
@@ -72,7 +72,7 @@
         $.ajax({
             url: 'http://127.0.0.2:8080/api/restful/' + id,
             type: 'delete',
-            success: (data)=> {
+            success: (data) => {
                 console.log(data);
             }
         });
@@ -80,7 +80,7 @@
     function doCrossDomain() {
         $.ajax({
             url: 'http://127.0.0.2:8080/api/restful',
-            type: 'put',
+            type: 'POST',
             //accept: "application/json",
             contentType: "application/json",
             xhrFields: {withCredentials: true},
@@ -95,12 +95,12 @@
                     k3: 'v3'
                 },
             }),
-            success: (data)=> {
+            success: (data) => {
                 console.log(data);
             }
         });
     }
-    function jsonpCallback(data){
+    function showData(data){
         console.log(data);
     }
     function doJsonp() {
@@ -111,8 +111,8 @@
             /**accept: "application/json",
             contentType: "application/json",*/
             cache: false,
-            jsonp: 'callback',
-            jsonpCallback: 'jsonpCallback',
+            //jsonp: 'callback',
+            jsonpCallback: 'showData',
             data: {
                 data: JSON.stringify({
                     param1: 'value1',
@@ -124,7 +124,7 @@
                     }
                 })
             },
-            success: (data)=> {
+            success: (data) => {
               console.log(data);
             }
         });

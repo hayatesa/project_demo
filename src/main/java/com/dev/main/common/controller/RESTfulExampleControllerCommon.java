@@ -1,15 +1,13 @@
 package com.dev.main.common.controller;
 
-import com.dev.main.common.util.JsonUtils;
 import com.dev.main.common.util.ResultMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/restful")
-public class RESTfulExampleController extends BaseController {
+public class RESTfulExampleControllerCommon extends CommonBaseController {
 
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
