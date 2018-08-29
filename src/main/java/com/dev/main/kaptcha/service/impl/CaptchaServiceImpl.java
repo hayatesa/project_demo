@@ -50,8 +50,8 @@ public class CaptchaServiceImpl implements ICaptchaService {
         String capText = captchaProducer.createText();
         Integer cookieExp = 60 * 5; // 过期时间 3 分钟
         String uuid = CommonUtil.createUUID(); // 作为Redis中的验证码的key，同时存储在Cookie中用于
-        redisTemplate.opsForValue().set(uuid, capText, cookieExp, TimeUnit.SECONDS);
-        CookieUtils.addCookie(response, CaptchaConstant.COOKIE_NAME, uuid, cookieExp, CaptchaConstant.COOKIE_PATH);
+        redisTemplate.opsForValue().set(CaptchaConstant.CAPTCHA_CODE_PREFIX + uuid, capText, cookieExp, TimeUnit.SECONDS);
+        CookieUtils.addCookie(response, CaptchaConstant.COOKIE_NAME, CaptchaConstant.CAPTCHA_CODE_PREFIX + uuid, cookieExp, CaptchaConstant.COOKIE_PATH);
 
         BufferedImage bi = captchaProducer.createImage(capText);
         ServletOutputStream out = response.getOutputStream();

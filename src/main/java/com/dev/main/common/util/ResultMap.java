@@ -19,8 +19,8 @@ public class ResultMap extends HashMap<String, Object> {
     /**
      * 异常
      */
-    public static ResultMap error() {
-        return error(StatusCode.ERROR, "操作失败");
+    public static ResultMap fail() {
+        return fail(StatusCode.ERROR, "操作失败");
     }
 
     /**
@@ -28,8 +28,8 @@ public class ResultMap extends HashMap<String, Object> {
      * @param msg 文本消息
      * @return
      */
-    public static ResultMap error(String msg) {
-        return error(500, msg);
+    public static ResultMap fail(String msg) {
+        return fail(500, msg);
     }
 
     /**
@@ -37,7 +37,7 @@ public class ResultMap extends HashMap<String, Object> {
      * @param code 业务异常，枚举
      * @param msg 描述
      */
-    public static ResultMap error(Integer code, String msg) {
+    public static ResultMap fail(Integer code, String msg) {
         ResultMap r = new ResultMap();
         r.put(CODE, code);
         r.put(MSG, msg);

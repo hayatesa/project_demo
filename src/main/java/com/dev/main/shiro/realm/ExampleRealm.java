@@ -6,6 +6,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.List;
@@ -54,9 +55,11 @@ public class ExampleRealm extends AuthorizingRealm {
             throw new UnknownAccountException();
         }
         String password = user.getPassword();*/
+        // String saltStr = "example";
+        String password = "example";
         // 盐值
-        // ByteSource salt = ByteSource.Util.bytes(user.getSalt());
-        // SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, password, salt, getName());
-        return null;
+        //ByteSource salt = ByteSource.Util.bytes(saltStr);
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, password, getName());
+        return info;
     }
 }

@@ -37,6 +37,7 @@
         <java.version>1.8</java.version>
 
         <commons-lang3-version>3.8</commons-lang3-version>
+        <commons-pool-version>2.6.0</commons-pool-version>
         <druid-version>1.1.10</druid-version>
         <fast-json-version>1.2.49</fast-json-version>
         <kaptcha-version>2.3.2</kaptcha-version>
@@ -67,6 +68,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!--spring2.0集成redis所需common-pool2-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>${commons-pool-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

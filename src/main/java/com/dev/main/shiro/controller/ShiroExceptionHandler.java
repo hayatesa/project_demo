@@ -3,14 +3,17 @@ package com.dev.main.shiro.controller;
 import com.dev.main.common.statics.Constant;
 import com.dev.main.common.statics.StatusCode;
 import com.dev.main.common.util.JsonUtils;
+import com.dev.main.common.util.ResultMap;
 import com.dev.main.shiro.util.ShiroFilterUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,5 +79,12 @@ public class ShiroExceptionHandler {
                 out.close();
             }
         }
+    }
+
+    @ResponseBody
+    @ExceptionHandler({IncorrectCredentialsException.class})
+    public ResultMap incorrectCredentialsException(IncorrectCredentialsException e) {
+        e.printStackTrace();
+        return ResultMap.fail("用户名或密码错误");
     }
 }

@@ -20,28 +20,28 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResultMap dataNotFoundExceptionHandler(DataNotFoundException e) {
         e.printStackTrace();
-        return ResultMap.error(e.getMessage());
+        return ResultMap.fail(e.getMessage());
     }
 
     @ExceptionHandler(value = DataUpdateException.class)
     @ResponseBody
     public ResultMap dataUpdateExceptionHandler(DataUpdateException e) {
         e.printStackTrace();
-        return ResultMap.error(e.getMessage());
+        return ResultMap.fail(e.getMessage());
     }
 
     @ExceptionHandler(value = IllegalParameterException.class)
     @ResponseBody
     public ResultMap illegalParameterExceptionHandler(IllegalParameterException e) {
         e.printStackTrace();
-        return ResultMap.error(e.getMessage());
+        return ResultMap.fail(e.getMessage());
     }
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResultMap exceptionHandler(Exception e) {
         e.printStackTrace();
-        return ResultMap.error(e.getMessage());
+        return ResultMap.fail(e.getMessage());
     }
 
 }
