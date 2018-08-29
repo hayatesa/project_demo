@@ -1,4 +1,5 @@
 package com.dev.main.shiro.redis;
+
 import com.dev.main.redis.util.JedisUtil;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.shiro.session.Session;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 
 public class RedisSessionDao extends CachingSessionDAO {
 
-    private static final String PREFIX = "SHIRO_SESSION_ID";
+    private static final String PREFIX = "SHIRO_SESSION_ID_";
 
     private static final int EXPRIE = 10000;
 
@@ -24,10 +25,10 @@ public class RedisSessionDao extends CachingSessionDAO {
         Serializable serializable = this.generateSessionId(session);
         assignSessionId(session, serializable);
         Jedis jedis = JedisUtil.getJedis();
-        session.setTimeout(EXPRIE*1000);
+        session.setTimeout(EXPRIE * 1000);
         /*jedis.set(getByteKey(serializable),SerializationUtils.serialize((Serializable)session));
         jedis.expire(SerializationUtils.serialize(getByteKey(serializable)),EXPRIE);*/
-        jedis.setex(getByteKey(serializable),EXPRIE,SerializationUtils.serialize((Serializable)session) );
+        jedis.setex(getByteKey(serializable), EXPRIE, SerializationUtils.serialize((Serializable) session));
         JedisUtil.closeJedis(jedis);
         return serializable;
     }
@@ -41,35 +42,36 @@ public class RedisSessionDao extends CachingSessionDAO {
         byte[] s = jedis.get(getByteKey(serializable));
         if (s != null) {
             session = SerializationUtils.deserialize(s);
-            jedis.expire((PREFIX+serializable).getBytes(),EXPRIE);
+            jedis.expire((PREFIX + serializable).getBytes(), EXPRIE);
         }
         //判断是否有会话  没有返回NULL
-        if(session==null){
+        if (session == null) {
             return null;
         }
         JedisUtil.closeJedis(jedis);
         return session;
     }
 
-    private byte[] getByteKey(Object k){
-        if(k instanceof String){
-            String key = PREFIX+k;
+    private byte[] getByteKey(Object k) {
+        if (k instanceof String) {
+            String key = PREFIX + k;
             return key.getBytes();
-        }else {
+        } else {
             return SerializationUtils.serialize((Serializable) k);
         }
     }
+
     @Override
     protected void doUpdate(Session session) {
         LOGGER.info("--------doUpdate-----");
-        if(session==null){
-            return ;
+        if (session == null) {
+            return;
         }
         Jedis jedis = JedisUtil.getJedis();
-        session.setTimeout(EXPRIE*1000);
+        session.setTimeout(EXPRIE * 1000);
        /*jedis.set(getByteKey(session.getId()),SerializationUtils.serialize((Serializable)session));
        jedis.expire(SerializationUtils.serialize((PREFIX+session.getId())),EXPRIE);*/
-        jedis.setex(getByteKey(session.getId()),EXPRIE,SerializationUtils.serialize((Serializable)session) );
+        jedis.setex(getByteKey(session.getId()), EXPRIE, SerializationUtils.serialize((Serializable) session));
 
 
     }

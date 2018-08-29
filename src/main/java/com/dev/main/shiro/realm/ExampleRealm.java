@@ -1,5 +1,6 @@
 package com.dev.main.shiro.realm;
 
+import com.dev.main.shiro.domain.SysUser;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -59,7 +60,11 @@ public class ExampleRealm extends AuthorizingRealm {
         String password = "example";
         // 盐值
         //ByteSource salt = ByteSource.Util.bytes(saltStr);
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, password, getName());
+        SysUser user = new SysUser();
+        user.setId("12542");
+        user.setUsername("example");
+        user.setSalt("dsfsdf");
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());
         return info;
     }
 }

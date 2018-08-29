@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
-
 import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -48,7 +47,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");
         Map<String, String> map = new LinkedHashMap<String, String>();
         //验证码的路径   不要跟下面需要认证的写在一个路径里  会被拦截的
-        map.put("/servlet/**", "anon");
+        //map.put("/servlet/**", "anon");
         //需要把要授权的URL  全部装到filterChain中去过滤
         /*UserInfo userInfo = userReposisty.findByUid(1);
         for (Role role : userInfo.getRoles()) {
@@ -59,7 +58,7 @@ public class ShiroConfig {
                 }
             }
         }*/
-        map.put("/user*/*", "authc");
+        //map.put("/user*/*", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         shiroFilterFactoryBean.setFilters(filterMap);
 

@@ -1,20 +1,18 @@
-package com.dev.main.common.controller;
+package com.dev.main.common.controller.exception;
 
 import com.dev.main.common.exception.DataNotFoundException;
 import com.dev.main.common.exception.DataUpdateException;
 import com.dev.main.common.exception.IllegalParameterException;
 import com.dev.main.common.util.ResultMap;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 /**
  * 全局异常处理,最佳实践, 把处于顶层的异常类搁置到代码最尾端
  */
-@ControllerAdvice(annotations = {RestController.class, Controller.class})
-public class GlobalExceptionHandler {
+@ControllerAdvice(annotations = {GlobalExceptionResolver.class})
+public class CommonExceptionHandler {
 
     @ExceptionHandler(value = DataNotFoundException.class)
     @ResponseBody

@@ -1,5 +1,6 @@
-package com.dev.main.shiro.controller;
+package com.dev.main.shiro.controller.exception;
 
+import com.dev.main.common.controller.exception.CommonExceptionHandler;
 import com.dev.main.common.statics.Constant;
 import com.dev.main.common.statics.StatusCode;
 import com.dev.main.common.util.JsonUtils;
@@ -10,11 +11,9 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,8 +25,8 @@ import java.util.Map;
 /**
  * 最佳实践, 把处于顶层的异常类搁置到代码最尾端
  */
-@ControllerAdvice(annotations = {RestController.class, Controller.class})
-public class ShiroExceptionHandler {
+@ControllerAdvice(annotations = {ShiroExceptionResolver.class})
+public class ShiroExceptionHandler extends CommonExceptionHandler {
     /**
      * 登录认证异常
      */
